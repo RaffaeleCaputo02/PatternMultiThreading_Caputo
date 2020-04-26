@@ -36,6 +36,7 @@ namespace FireForget
             cts = new CancellationTokenSource();
             Worker wrk = new Worker(10,1000,cts);
             wrk.Start();
+
             MessageBox.Show("Mi dimentico del thread secondario e non lo attendo per visualizzare questo messaggio");
         }
 
