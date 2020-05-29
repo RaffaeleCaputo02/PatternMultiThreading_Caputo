@@ -34,9 +34,11 @@ namespace FireForget
         {
             btn_Fine.IsEnabled = true;
             cts = new CancellationTokenSource();
-            WorkerAsync wrk = new WorkerAsync(10,1000,cts);
-            
-            //IProgress<int> progress = new Progress<int>(UpdateUI);
+            Semaphore sem = new Semaphore(2, 2);
+
+            IProgress<int> progress = new Progress<int>(UpdateUI);
+            WorkerProgressAsync wrk = new WorkerProgressAsync(10, 1000, cts,progress,sem);
+
             //WorkerProgress wrk = new WorkerProgress(10, 1000, cts, progress);
             await wrk.Start();
 
